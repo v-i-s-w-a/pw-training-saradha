@@ -1,36 +1,30 @@
 import { BasePage } from "./BasePage";
-import type { Locator, Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
+
 export class CartPage extends BasePage {
+    static itemNames() {
+        throw new Error('Method not implemented.');
+    }
 
-//readonly cartItem : Locator;
-
-constructor(page: Page) {
-
-    super(page, '/cart.html');
-}
-    async addToCart(itemName: string) {
-       const itemLocator = this.page.getByTestId('inventory-item').filter({
-        hasText: itemName
-    });
-       const addToCartButton = itemLocator.getByRole('button', {
-        name: 'Add to cart'
-    });
-       await addToCartButton.click();
+    constructor(page: Page) {
+        super(page, '/cart.html');
     }
 
     async removeItem(itemName: string) {
         const itemLocator = this.page.getByTestId('inventory-item').filter({
-        hasText: itemName
-  });
+            hasText: itemName
+        });
+
         const removeButton = itemLocator.getByRole('button', {
-        name: 'Remove'
-  });
+            name: 'Remove'
+        });
+
         await removeButton.click();
-}
+    }
 
     async itemNames(): Promise<string[]> {
-     return await this.page
-     .locator(".inventory_item_name")
-     .allTextContents();
-}
+        return await this.page
+            .locator(".inventory_item_name")
+            .allTextContents();
+    }
 }
