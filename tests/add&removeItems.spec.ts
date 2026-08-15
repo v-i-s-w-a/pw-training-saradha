@@ -10,10 +10,12 @@ test('Add and Remove Items from Cart', async ({ page }) => {
     expect(page.url()).toContain('/inventory.html');
 
     const inventoryPage = new InventoryPage(page);
+    await inventoryPage.navigateTo();
     await inventoryPage.addToCart('Sauce Labs Backpack');
     await inventoryPage.addToCart('Sauce Labs Bike Light');
-    await inventoryPage.navigateTo();
+
     const cartPage = new CartPage(page);
+    await cartPage.navigateTo();
     const itemNames = await cartPage.itemNames();
     console.log("Items in cart:", itemNames);
     expect(itemNames).toContain('Sauce Labs Backpack');
