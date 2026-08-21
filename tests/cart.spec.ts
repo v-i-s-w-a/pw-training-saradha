@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures';
 
-test('Add and Remove Items from Cart', async ({ cartPage }) => {
+test('Add and Remove Items from Cart', async ({ cartPage, page }) => {
     const itemNames = await cartPage.itemNames();
       console.log("Items in cart:", itemNames);
 
