@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+
+dotenv.config({ quiet: true });
 
 /**
  * Read environment variables from file.
@@ -26,7 +29,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: "https://www.saucedemo.com",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -35,21 +38,42 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
+ projects: [
+  {
+    name: 'setup',
+    testMatch: /.*\.setup\.ts/,
+  },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+  {
+    name: 'chromium',
+    use: {
+      ...devices['Desktop Chrome'],
+      storageState: '.auth/user.json',
     },
+    dependencies: ['setup'],
+    testIgnore: /problem_user\.spec\.ts/,
+  },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+  {
+    name: 'chromium-problem',
+    use: {
+        ...devices['Desktop Chrome'],
+        storageState: '.auth/problemUser.json',
     },
+    dependencies: ['setup'],
+    testMatch: /problem_user\.spec\.ts/,
+
+},
+],
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
@@ -70,7 +94,6 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
 
   /* Run your local dev server before starting the tests */
   // webServer: {
