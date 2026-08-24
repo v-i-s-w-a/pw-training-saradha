@@ -4,8 +4,9 @@ import {LoginPage} from '../pages/LoginPage';
 setup('Authenticate Standard User', async ({ page }) => {
 
 const authFile = '.auth/user.json';
-    const username = process.env.USERNAME;
-    const password = process.env.PASSWORD;
+    //const username = process.env.USERNAME;
+    const username = "standard_user";
+    const password = "secret_sauce";
     const login = new LoginPage(page);
     await login.navigateTo();
     await login.login(username as string, password as string);
@@ -17,8 +18,8 @@ const authFile = '.auth/user.json';
 
 setup('Authenticate problem user', async ({ page }) => {
     const problemAuthFile = '.auth/problemUser.json';
-    const problem_username = process.env.PUSERNAME;
-    const password = process.env.PASSWORD;
+    const problem_username = "problem_user";
+    const password = "secret_sauce";
     const login = new LoginPage(page);
     await login.navigateTo();
     await login.login(problem_username as string, password as string);
