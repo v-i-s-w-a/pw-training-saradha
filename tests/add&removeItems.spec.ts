@@ -8,12 +8,10 @@ test('Add and Remove Items from Cart', async ({ page }) => {
     await loginPage.navigateTo();
     await loginPage.login('standard_user', 'secret_sauce');
     expect(page.url()).toContain('/inventory.html');
-
     const inventoryPage = new InventoryPage(page);
     await inventoryPage.navigateTo();
     await inventoryPage.addToCart('Sauce Labs Backpack');
     await inventoryPage.addToCart('Sauce Labs Bike Light');
-
     const cartPage = new CartPage(page);
     await cartPage.navigateTo();
     const itemNames = await cartPage.itemNames();
