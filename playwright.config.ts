@@ -51,20 +51,36 @@ export default defineConfig({
       storageState: '.auth/user.json',
     },
     dependencies: ['setup'],
-    testIgnore: /problem_user\.spec\.ts/,
+    //testIgnore: /problem_user\.spec\.ts/,
   },
-
   {
-    name: 'chromium-problem',
+    name: 'firefox',
     use: {
-        ...devices['Desktop Chrome'],
-        storageState: '.auth/problemUser.json',
+      ...devices['Desktop Firefox'],
+      storageState: '.auth/user.json',
     },
     dependencies: ['setup'],
-    testMatch: /problem_user\.spec\.ts/,
+  },
+  {
+    name: 'webkit',
+    use: {
+      ...devices['Desktop Safari'],
+      storageState: '.auth/user.json',
+    },
+    dependencies: ['setup'],
+  },
 
-},
-],
+//   {
+//     name: 'chromium-problem',
+//     use: {
+//         ...devices['Desktop Chrome'],
+//         storageState: '.auth/user.json',
+//     },
+//     dependencies: ['setup'],
+//     //testMatch: /problem_user\.spec\.ts/,
+
+// },
+]
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
