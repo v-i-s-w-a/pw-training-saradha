@@ -11,5 +11,5 @@ test('Problem user sees the same image for all products', async ({ page }) => {
         console.log(imageSources);
       
    expect(imageSources).toHaveLength(6);
-    expect(new Set(imageSources).size).toBe(6);
+    expect(new Set(imageSources).size).toBe(1);
 });
