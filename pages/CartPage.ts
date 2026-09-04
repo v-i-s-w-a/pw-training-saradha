@@ -20,8 +20,10 @@ export class CartPage extends BasePage {
     }
 
     async itemNames(): Promise<string[]> {
-        return await this.page
-            .locator(".inventory_item_name")
-            .allTextContents();
+             await this.page
+            .locator(".inventory_item_name");
+        const items = this.page.locator(".inventory_item_name");
+        await items.first().waitFor({ state: "visible" });
+        return await items.allTextContents();
     }
 }
